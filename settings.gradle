@@ -1,0 +1,3 @@
+include ':device'
+include ':app'
+rootProject.name = "HoppenDevice"
