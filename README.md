@@ -40,6 +40,9 @@ controller.setOnInstructionListener(callback -> {
 ```
 #### 设备控制
 ```
+ //typeCode:WSKT001、WSKT002、WSKT003、WSKT004、WSKT005、WSKT006、WSKT007、WSKT008、WSKT009、WSKT010
+ //         WSKT011、WSKT012、WSKT013、WSKT014、WSKT015、WSKT016、WSKT017
+ 
   /**
      * @param mode 模式
      * @param strength 强度
@@ -70,8 +73,8 @@ controller.exitHandleRate();
 ###### app触发指令返回
 |文字|说明|
 |---|:---:|
-|Function-ON|功能设备开启（设备主动发送指令到app）|
-|Function-OFF|功能设备关闭（设备主动发送指令到app）|
+|Function-ON|功能设备开启|
+|Function-OFF|功能设备关闭|
 |Set-Freq-Val|设定频率参数|
 |Quick-FreqSet|退出频率设定|
 |Select-Oxygen|注氧喷枪|
@@ -94,3 +97,11 @@ controller.exitHandleRate();
 |Select-Scalp-Sonic|头皮超声波|
 |Select-Heat|热导入|
 |Select-BIO|BIO微电|
+
+###### 其他或错误
+|文字|说明|
+|---|:---:|
+|Check-Sum-Err|校验出错|
+|Command-Invalid|无效的指令（校验正确）|
+|FunctionModel-Err|护理模式不正确的返回例如在小气泡护理模式下，发送非小气泡功能对应的指令（模式切换指令除外）|
+|Communicate-Err|系统通讯出错|

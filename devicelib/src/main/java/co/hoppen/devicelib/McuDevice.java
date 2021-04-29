@@ -54,7 +54,7 @@ public class McuDevice extends HoppenDevice{
                         String[] strings = decodingData(bytes);
                         if (strings!=null){
                             for (String data :strings){
-                                if (!data.equals("System-Online")){
+                                if (!data.equals("System-OnLine")){
                                     if (onInstructionListener!=null){
                                         instructionCallbackForMainThread(data);
                                     }

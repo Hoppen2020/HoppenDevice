@@ -7,24 +7,260 @@
     tools:context=".MainActivity"
     android:background="@color/black"
     android:gravity="center"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     >
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:gravity="center"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <EditText
+                android:id="@+id/et_code"
+                android:text="WSKT001"
+                android:textSize="30sp"
+                android:textColor="@color/white"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:background="#999999"
+                android:singleLine="true"
+                android:gravity="center"
+                />
+            <Button
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                android:id="@+id/btn_select"
+                android:onClick="select"
+                android:layout_width="80dp"
+                android:layout_height="50dp"
+                android:text="选择"
+                />
+
+
+        </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="#e7e9d1"
+                    >
+                    <LinearLayout
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="当前模式："
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            android:layout_marginEnd="20dp"
+                            />
+                        <Button
+                            android:layout_margin="10dp"
+                            android:id="@+id/btn_mode_sub"
+                            android:onClick="mode"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:text="-"
+                            />
+                        <TextView
+                            android:id="@+id/tv_mode"
+                            android:gravity="center"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="18sp"
+                            android:textColor="#999999"
+                            android:text="0"
+                            />
+
+                        <Button
+                            android:layout_margin="10dp"
+                            android:id="@+id/btn_mode_add"
+                            android:onClick="mode"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:text="+"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginTop="5dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="当前强度："
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            android:layout_marginEnd="20dp"
+                            />
+                        <Button
+                            android:layout_margin="10dp"
+                            android:id="@+id/btn_strength_sub"
+                            android:onClick="strength"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:text="-"
+                            />
+                        <TextView
+                            android:id="@+id/tv_strength"
+                            android:gravity="center"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="18sp"
+                            android:textColor="#999999"
+                            android:text="0"
+                            />
+                        <Button
+                            android:layout_margin="10dp"
+                            android:id="@+id/btn_strength_add"
+                            android:onClick="strength"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:text="+"
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginTop="5dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="当前时间："
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            android:layout_marginEnd="20dp"
+                            />
+                        <Button
+                            android:layout_margin="10dp"
+                            android:id="@+id/btn_time_sub"
+                            android:onClick="time"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:text="-"
+                            />
+
+                        <TextView
+                            android:id="@+id/tv_time"
+                            android:gravity="center"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="18sp"
+                            android:textColor="#999999"
+                            android:text="5"
+                            />
+                        <Button
+                            android:layout_margin="10dp"
+                            android:id="@+id/btn_time_add"
+                            android:onClick="time"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:text="+"
+                            />
+
+                    </LinearLayout>
+
+                    <Button
+                        android:layout_margin="5dp"
+                        android:layout_gravity="center"
+                        android:id="@+id/btn_set"
+                        android:onClick="function"
+                        android:layout_width="80dp"
+                        android:layout_height="50dp"
+                        android:text="设置"
+                        />
+
+
+                </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <Button
+                android:layout_margin="10dp"
+                android:id="@+id/btn_start"
+                android:onClick="function"
+                android:layout_width="80dp"
+                android:layout_height="50dp"
+                android:text="开始"
+
+                />
+            <Button
+                android:layout_margin="10dp"
+                android:id="@+id/btn_stop"
+                android:onClick="function"
+                android:layout_width="80dp"
+                android:layout_height="50dp"
+                android:text="停止"
+                />
+
+        </LinearLayout>
 
 
 
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/tv_test"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="open light"
-        />
-    <Button
-        android:id="@+id/tv_test2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="closes light"
-        />
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        >
+
+        <ScrollView
+            android:id="@+id/scrollview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <TextView
+                android:id="@+id/tv_callback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:gravity="center"
+                />
+
+
+        </ScrollView>
+
+
+    </LinearLayout>
 
 
 
