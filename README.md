@@ -38,7 +38,7 @@ controller.setOnInstructionListener(callback -> {
     //callback指令回调
 });
 ```
-#### 设备控制
+#### 设备控制(必须：先selectHandle)
 ```
  //typeCode:WSKT001、WSKT002、WSKT003、WSKT004、WSKT005、WSKT006、WSKT007、WSKT008、WSKT009、WSKT010
  //         WSKT011、WSKT012、WSKT013、WSKT014、WSKT015、WSKT016、WSKT017
@@ -97,6 +97,11 @@ controller.exitHandleRate();
 |Select-Scalp-Sonic|头皮超声波|
 |Select-Heat|热导入|
 |Select-BIO|BIO微电|
+
+###### 调频说明 例：
+|文字|说明|
+|---|:---:|
+|声波：FreqSet-2-1-(1-9)|默认值：2  步进值：1 范围：1~9|
 
 ###### 其他或错误
 |文字|说明|

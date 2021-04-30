@@ -126,4 +126,25 @@ public class MainActivity extends AppCompatActivity implements OnDeviceListener 
                 break;
         }
     }
+
+    public void enter(View view) {
+        if (controller==null)return;
+        controller.enterHandleRate();
+    }
+
+    public void exit(View view) {
+        if (controller==null)return;
+        controller.exitHandleRate();
+    }
+
+    public void setRate(View view) {
+        try {
+            if (controller==null)return;
+            EditText et_rate = findViewById(R.id.et_rate);
+            int rate = Integer.parseInt(et_rate.getText().toString());
+            controller.setHandleRate(rate);
+        }catch (Exception e){
+
+        }
+    }
 }

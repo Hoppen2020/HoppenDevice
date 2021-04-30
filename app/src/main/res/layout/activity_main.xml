@@ -24,14 +24,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:gravity="center"
             >
             <EditText
                 android:id="@+id/et_code"
                 android:text="WSKT001"
-                android:textSize="30sp"
+                android:textSize="28sp"
                 android:textColor="@color/white"
                 android:layout_width="200dp"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:background="#999999"
                 android:singleLine="true"
                 android:gravity="center"
@@ -42,7 +43,7 @@
                 android:id="@+id/btn_select"
                 android:onClick="select"
                 android:layout_width="80dp"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:text="选择"
                 />
 
@@ -71,11 +72,11 @@
                             android:layout_marginEnd="20dp"
                             />
                         <Button
-                            android:layout_margin="10dp"
+                            android:layout_margin="8dp"
                             android:id="@+id/btn_mode_sub"
                             android:onClick="mode"
                             android:layout_width="50dp"
-                            android:layout_height="50dp"
+                            android:layout_height="40dp"
                             android:text="-"
                             />
                         <TextView
@@ -91,11 +92,11 @@
                             />
 
                         <Button
-                            android:layout_margin="10dp"
+                            android:layout_margin="8dp"
                             android:id="@+id/btn_mode_add"
                             android:onClick="mode"
                             android:layout_width="50dp"
-                            android:layout_height="50dp"
+                            android:layout_height="40dp"
                             android:text="+"
                             />
 
@@ -117,11 +118,11 @@
                             android:layout_marginEnd="20dp"
                             />
                         <Button
-                            android:layout_margin="10dp"
+                            android:layout_margin="8dp"
                             android:id="@+id/btn_strength_sub"
                             android:onClick="strength"
                             android:layout_width="50dp"
-                            android:layout_height="50dp"
+                            android:layout_height="40dp"
                             android:text="-"
                             />
                         <TextView
@@ -136,11 +137,11 @@
                             android:text="0"
                             />
                         <Button
-                            android:layout_margin="10dp"
+                            android:layout_margin="8dp"
                             android:id="@+id/btn_strength_add"
                             android:onClick="strength"
                             android:layout_width="50dp"
-                            android:layout_height="50dp"
+                            android:layout_height="40dp"
                             android:text="+"
                             />
 
@@ -162,11 +163,11 @@
                             android:layout_marginEnd="20dp"
                             />
                         <Button
-                            android:layout_margin="10dp"
+                            android:layout_margin="8dp"
                             android:id="@+id/btn_time_sub"
                             android:onClick="time"
                             android:layout_width="50dp"
-                            android:layout_height="50dp"
+                            android:layout_height="40dp"
                             android:text="-"
                             />
 
@@ -182,26 +183,51 @@
                             android:text="5"
                             />
                         <Button
-                            android:layout_margin="10dp"
+                            android:layout_margin="8dp"
                             android:id="@+id/btn_time_add"
                             android:onClick="time"
                             android:layout_width="50dp"
-                            android:layout_height="50dp"
+                            android:layout_height="40dp"
                             android:text="+"
                             />
 
                     </LinearLayout>
 
-                    <Button
+
+                    <LinearLayout
                         android:layout_margin="5dp"
                         android:layout_gravity="center"
-                        android:id="@+id/btn_set"
-                        android:onClick="function"
-                        android:layout_width="80dp"
-                        android:layout_height="50dp"
-                        android:text="设置"
-                        />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        >
+                        <Button
+                            android:id="@+id/btn_set"
+                            android:onClick="function"
+                            android:layout_width="80dp"
+                            android:layout_height="40dp"
+                            android:text="设置"
+                            android:layout_margin="8dp"
+                            />
+                        <Button
+                            android:layout_margin="8dp"
+                            android:id="@+id/btn_start"
+                            android:onClick="function"
+                            android:layout_width="80dp"
+                            android:layout_height="40dp"
+                            android:text="开始"
 
+                            />
+                        <Button
+                            android:layout_margin="8dp"
+                            android:id="@+id/btn_stop"
+                            android:onClick="function"
+                            android:layout_width="80dp"
+                            android:layout_height="40dp"
+                            android:text="停止"
+                            />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -210,26 +236,69 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:gravity="center"
+            android:background="#DD5246"
             >
-            <Button
-                android:layout_margin="10dp"
-                android:id="@+id/btn_start"
-                android:onClick="function"
-                android:layout_width="80dp"
-                android:layout_height="50dp"
-                android:text="开始"
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="调频"
+                android:textColor="@color/black"
+                android:textSize="18sp"
                 />
             <Button
-                android:layout_margin="10dp"
-                android:id="@+id/btn_stop"
-                android:onClick="function"
-                android:layout_width="80dp"
-                android:layout_height="50dp"
-                android:text="停止"
+                android:onClick="enter"
+                android:layout_margin="8dp"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:text="enter"
+                android:textSize="10sp"
                 />
+
+            <Button
+                android:onClick="exit"
+                android:layout_margin="8dp"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:text="exit"
+                android:textSize="10sp"
+                />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:background="#F69364"
+                >
+                <EditText
+                    android:id="@+id/et_rate"
+                    android:gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textColor="#333333"
+                    android:text="0"
+                    android:background="#999999"
+                    android:singleLine="true"
+                    android:inputType="number"
+                    />
+                <Button
+                    android:onClick="setRate"
+                    android:layout_margin="8dp"
+                    android:layout_width="70dp"
+                    android:layout_height="40dp"
+                    android:text="set"
+                    android:textSize="10sp"
+                    />
+
+            </LinearLayout>
+
 
         </LinearLayout>
+
 
 
 
