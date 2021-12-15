@@ -23,10 +23,16 @@ public class MainActivity extends AppCompatActivity implements OnDeviceListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
-        controller = HoppenDeviceHelper.createController(this, this);
+        controller = HoppenDeviceHelper.createController(this, true);
         controller.setOnInstructionListener(callback -> {
             send(callback);
         });
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     @Override

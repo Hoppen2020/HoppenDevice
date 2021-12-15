@@ -92,7 +92,24 @@ public class UsbInstructionUtils {
             handle =(byte)0x0E;
         }else if (typeName.equals("WSKT017")){
             handle =(byte)0x08;
+        }else if (typeName.equals("WSKT019")){
+            handle =(byte)0x12;
+        }else if (typeName.equals("WSKT020")){
+            handle =(byte)0x13;
+        }else if (typeName.equals("WSKT021")){
+            handle =(byte)0x14;
+        }else if (typeName.equals("WSKT022")){
+            handle =(byte)0x15;
+        }else if (typeName.equals("WSKT023")){
+            handle =(byte)0x16;
+        }else if (typeName.equals("WSKT024")){
+            handle =(byte)0x17;
+        }else if (typeName.equals("WSKT025")){
+            handle =(byte)0x18;
+        }else if (typeName.equals("WSKT026")){
+            handle =(byte)0x19;
         }
+
         byte[] config={(byte) 0xAA, (byte) 0x40, (byte) 0x00, (byte) 0x00, (byte) 0x00,  handle};
         return encryption(config);
     }

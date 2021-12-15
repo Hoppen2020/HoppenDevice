@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="floating_ball_radius">20px</dimen>
+    <dimen name="floating_ball_width">40px</dimen>
+    <dimen name="floating_ball_height">40px</dimen>
+
+</resources>

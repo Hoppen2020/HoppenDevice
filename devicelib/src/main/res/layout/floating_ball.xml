@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#00ffffff"
+    >
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_content"
+            android:layout_width="@dimen/floating_ball_width"
+            android:layout_height="@dimen/floating_ball_height"
+            app:cardCornerRadius="@dimen/floating_ball_radius"
+            app:cardBackgroundColor="#66000000"
+            app:cardElevation="0px"
+            >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+                <LinearLayout
+                    android:id="@+id/ll_title"
+                    android:layout_width="0px"
+                    android:layout_height="@dimen/floating_ball_height"
+                    android:background="@drawable/floating_ball_title_bg"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:gravity="end"
+                    android:alpha="0.3"
+                    >
+                    <TextView
+                        android:layout_marginEnd="30px"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textSize="22px"
+                        android:gravity="center"
+                        android:textColor="#dddddd"
+                        android:text="clean"
+                        android:textStyle="italic"
+                        android:textAllCaps="true"
+                        android:id="@+id/tv_clean"
+                        android:visibility="gone"
+                        />
+
+                </LinearLayout>
+
+                <ScrollView
+                    android:layout_width="0px"
+                    android:layout_height="0px"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ll_title"
+                    android:scrollbars="none"
+                    android:overScrollMode="never"
+                    android:paddingStart="10px"
+                    android:paddingEnd="10px"
+                    android:paddingBottom="10px"
+                    >
+                    <TextView
+                        android:id="@+id/tv_debug"
+                        android:includeFontPadding="false"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18px"
+                        android:textColor="@android:color/white"
+                        android:text="test test test test test test test test test test test test test test test test test test test test test test test test"
+                        />
+
+                </ScrollView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+
+
+
+
+</FrameLayout>
