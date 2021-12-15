@@ -10,7 +10,7 @@ allprojects {
 ```
 ```
 dependencies {
-    implementation 'com.github.Hoppen2020:HoppenDevice:1.0.0'
+    implementation 'com.github.Hoppen2020:HoppenDevice:1.0.1'
 }
 ```
 #### 使用
@@ -98,6 +98,11 @@ controller.exitHandleRate();
 |Select-Scalp-Sonic|头皮超声波|
 |Select-Heat|热导入|
 |Select-BIO|BIO微电|
+|Select-Eyeshade|眼罩|
+|Select-GirlLine|少女线|
+|Select-WaterOxygen|水氧|
+|Select-OxygenInjection|注氧（非喷枪）|
+|Select-EMS|EMS|
 
 ###### 调频说明 例：
 |文字|说明|
