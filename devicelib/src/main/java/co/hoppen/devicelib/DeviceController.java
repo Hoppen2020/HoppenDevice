@@ -8,7 +8,11 @@ import android.hardware.usb.UsbManager;
 public class DeviceController implements Controller{
     private McuDevice mcuDevice;
 
-    public DeviceController(UsbManager usbManager,OnDeviceListener onDeviceListener){
+    public void setFloatingView(FloatingView floatingView) {
+        mcuDevice.setFloatingView(floatingView);
+    }
+
+    public DeviceController(UsbManager usbManager, OnDeviceListener onDeviceListener){
         mcuDevice = new McuDevice(usbManager);
         mcuDevice.setOnDeviceListener(onDeviceListener);
     }

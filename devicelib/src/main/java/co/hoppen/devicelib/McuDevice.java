@@ -31,9 +31,16 @@ public class McuDevice extends HoppenDevice{
     private String deviceName;
     private OnDeviceListener onDeviceListener;
     private OnInstructionListener onInstructionListener;
+    private FloatingView floatingView;
+
+    public void setFloatingView(FloatingView floatingView) {
+        this.floatingView = floatingView;
+    }
 
     public void setOnInstructionListener(OnInstructionListener onInstructionListener) {
         this.onInstructionListener = onInstructionListener;
+//        byte[] bytes = UsbInstructionUtils.USB_DEVICE_CODE();
+//        LogUtils.e(bytes.toString());
     }
 
     public void setOnDeviceListener(OnDeviceListener onDeviceListener) {
@@ -107,7 +114,7 @@ public class McuDevice extends HoppenDevice{
                     closeDevice();
                 }else {
                     if (onDeviceListener!=null)onDeviceListener.onConnected();
-                    disposable = Observable.interval(5, 2, TimeUnit.SECONDS).subscribe(new Consumer<Long>() {
+                    disposable = Observable.interval(5, 5, TimeUnit.SECONDS).subscribe(new Consumer<Long>() {
                         @Override
                         public void accept(Long aLong) throws Throwable {
                             sendInstructions(UsbInstructionUtils.USB_SYS_ONLINE());
@@ -150,10 +157,13 @@ public class McuDevice extends HoppenDevice{
         }
     }
 
-
     @Override
-    protected boolean sendInstructions(byte[] bytes) {
-        return sendInstructions(bytes,DEFAULT_TIMEOUT);
+    protected synchronized boolean sendInstructions(byte[] bytes) {
+        boolean b = sendInstructions(bytes, DEFAULT_TIMEOUT);
+        if (floatingView!=null){
+            ((FloatingBall)floatingView).addText(b+ " " + Arrays.toString(bytes));
+        }
+        return b;
     }
 
     @Override
@@ -209,7 +219,10 @@ public class McuDevice extends HoppenDevice{
     }
 
     private void instructionCallbackForMainThread(String data){
-        Observable.just(data).observeOn(AndroidSchedulers.mainThread()).subscribe(s -> onInstructionListener.onInstruction(data));
+        Observable.just(data).observeOn(AndroidSchedulers.mainThread()).subscribe(s -> {
+            if (floatingView!=null)((FloatingBall)floatingView).addText(s);
+            onInstructionListener.onInstruction(s);
+        });
     }
 
     private void setConfig(UsbDeviceConnection connection, int baudRate, int dataBit, int stopBit, int parity) {

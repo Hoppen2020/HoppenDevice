@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.TextView;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ScreenUtils;
@@ -119,5 +120,12 @@ class FloatingBall extends FloatingView implements View.OnClickListener {
         if (v.getId() == R.id.tv_clean) {
             LogUtils.e("clean");
         }
+    }
+
+    public void addText(String string){
+        TextView tv = ((TextView)debugText);
+        string = tv.getText().toString() + string + "\n";
+        tv.setText(string);
+
     }
 }

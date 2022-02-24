@@ -68,7 +68,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="18px"
                         android:textColor="@android:color/white"
-                        android:text="test test test test test test test test test test test test test test test test test test test test test test test test"
+                        android:text=""
                         />
 
                 </ScrollView>

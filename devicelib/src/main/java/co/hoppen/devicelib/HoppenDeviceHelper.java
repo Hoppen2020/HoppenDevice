@@ -32,6 +32,7 @@ public class HoppenDeviceHelper implements LifecycleEventObserver,OnUsbStatusLis
             appCompatActivity.getLifecycle().addObserver(this);
             if (debugWindow){
                 floatingView = FloatingBuilder.create(FLOATING_BALL.getClassName(), LayoutInflater.from(activity));
+                controller.setFloatingView(floatingView);
             }
         }
     }

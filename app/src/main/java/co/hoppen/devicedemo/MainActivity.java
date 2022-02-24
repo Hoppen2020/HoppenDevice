@@ -21,9 +21,10 @@ public class MainActivity extends AppCompatActivity implements OnDeviceListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        CrashHandler.getInstance().init();
         setContentView(R.layout.activity_main);
         initView();
-        controller = HoppenDeviceHelper.createController(this, true);
+        controller = HoppenDeviceHelper.createController(this, false);
         controller.setOnInstructionListener(callback -> {
             send(callback);
         });
@@ -51,8 +52,8 @@ public class MainActivity extends AppCompatActivity implements OnDeviceListener 
     }
 
     private void send(String send){
-        tv_callback.setText(tv_callback.getText().toString() + "\n"+send);
-        scrollview.fullScroll(View.FOCUS_DOWN);
+        tv_callback.setText(send + "\n"+ tv_callback.getText().toString());
+        scrollview.fullScroll(View.FOCUS_UP);
     }
 
     private int add(int num){
@@ -153,4 +154,21 @@ public class MainActivity extends AppCompatActivity implements OnDeviceListener 
 
         }
     }
+
+    public void wskt001(View view){
+        if (controller!=null)controller.selectHandle("WSKT001");
+    }
+
+    public void wskt006(View view){
+        if (controller!=null)controller.selectHandle("WSKT006");
+    }
+
+    public void wskt010(View view){
+        if (controller!=null)controller.selectHandle("WSKT010");
+    }
+
+    public void wskt002(View view){
+        if (controller!=null)controller.selectHandle("WSKT002");
+    }
+
 }
