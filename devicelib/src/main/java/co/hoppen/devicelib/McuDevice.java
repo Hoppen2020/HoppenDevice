@@ -89,11 +89,14 @@ public class McuDevice extends HoppenDevice{
         }else {
             if (!deviceName.equals(usbDevice.getDeviceName()))return;
         }
+        LogUtils.e(deviceName);
+
         usbDeviceConnection = usbManager.openDevice(usbDevice);
         int interfaceCount = usbDevice.getInterfaceCount();
         if (usbDeviceConnection!=null && interfaceCount>0){
             usbInterface = usbDevice.getInterface(interfaceCount - 1);
             boolean claimInterface = usbDeviceConnection.claimInterface(usbInterface, false);
+            LogUtils.e(claimInterface);
             if (claimInterface){
                 //设置波特率等设置
                 setConfig(usbDeviceConnection,9600,8,1,0);
@@ -110,6 +113,7 @@ public class McuDevice extends HoppenDevice{
                 }
                 //-----------
                 boolean success =  discernDevice();
+                LogUtils.e(success);
                 if (!success){
                     closeDevice();
                 }else {
@@ -138,11 +142,13 @@ public class McuDevice extends HoppenDevice{
                     try {
                         device = new String(bytes);
                         device = device.substring(device.indexOf("<[") + 2, device.lastIndexOf("]>")).trim();
+//                        LogUtils.e(device);
                     }catch (Exception e){
                     }
-                    if (device.equals("W003-8888-NURT-01"))return true;
+                    if (device.contains("W003-8888-NURT-"))return true;
                 }
             }
+
         }catch (Exception e){
         }
         return false;

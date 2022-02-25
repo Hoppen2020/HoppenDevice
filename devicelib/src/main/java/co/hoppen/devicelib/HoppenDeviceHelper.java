@@ -11,6 +11,8 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleEventObserver;
 import androidx.lifecycle.LifecycleOwner;
 
+import com.blankj.utilcode.util.LogUtils;
+
 import static co.hoppen.devicelib.FloatingType.FLOATING_BALL;
 
 /**
