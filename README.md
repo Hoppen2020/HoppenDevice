@@ -10,7 +10,7 @@ allprojects {
 ```
 ```
 dependencies {
-    implementation 'com.github.Hoppen2020:HoppenDevice:1.0.1'
+    implementation 'com.github.Hoppen2020:HoppenDevice:1.0.2-1'
 }
 ```
 #### 使用
@@ -70,6 +70,12 @@ controller.exitHandleRate();
 |Function-ON-RetCmm|功能设备开启|
 |Function-OFF-RetCmm|功能设备关闭|
 |WasteWater-Overflow|功能设备废水瓶溢出|
+|Stuck-BubblePen|清洁笔按键卡死|
+|Stuck-SkinScrubber|铲皮刀按键卡死|
+|Stuck-Oxygen|喷枪按键卡死|
+|Stuck-EyesRF|眼部射频按键卡死|
+|Stuck-EMS|EMS按键卡死|
+|Stuck-Cold|冰导按键卡死|
 
 ###### app触发指令返回
 |文字|说明|
