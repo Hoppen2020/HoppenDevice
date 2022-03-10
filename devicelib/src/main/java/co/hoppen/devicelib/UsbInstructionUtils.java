@@ -109,13 +109,13 @@ public class UsbInstructionUtils {
         }else if (typeName.equals("WSKT026")){
             handle =(byte)0x19;
         } else if (typeName.equals("WSKT027")){
-            handle =(byte)0x20;
+            handle =(byte)0x1A;
         } else if (typeName.equals("WSKT028")){
-            handle =(byte)0x21;
+            handle =(byte)0x1B;
         } else if (typeName.equals("WSKT029")){
-            handle =(byte)0x22;
+            handle =(byte)0x1C;
         } else if (typeName.equals("WSKT030")){
-            handle =(byte)0x30;
+            handle =(byte)0x1D;
         }
 
         byte[] config={(byte) 0xAA, (byte) 0x40, (byte) 0x00, (byte) 0x00, (byte) 0x00,  handle};
