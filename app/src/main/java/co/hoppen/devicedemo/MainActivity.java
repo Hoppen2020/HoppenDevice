@@ -151,7 +151,6 @@ public class MainActivity extends AppCompatActivity implements OnDeviceListener 
             int rate = Integer.parseInt(et_rate.getText().toString());
             controller.setHandleRate(rate);
         }catch (Exception e){
-
         }
     }
 

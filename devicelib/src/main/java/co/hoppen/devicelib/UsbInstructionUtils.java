@@ -111,11 +111,11 @@ public class UsbInstructionUtils {
         } else if (typeName.equals("WSKT027")){
             handle =(byte)0x1A;
         } else if (typeName.equals("WSKT028")){
-            handle =(byte)0x1B;
-        } else if (typeName.equals("WSKT029")){
             handle =(byte)0x1C;
-        } else if (typeName.equals("WSKT030")){
+        } else if (typeName.equals("WSKT029")){
             handle =(byte)0x1D;
+        } else if (typeName.equals("WSKT030")){
+            handle =(byte)0x1E;
         }
 
         byte[] config={(byte) 0xAA, (byte) 0x40, (byte) 0x00, (byte) 0x00, (byte) 0x00,  handle};
