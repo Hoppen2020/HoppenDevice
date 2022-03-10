@@ -1,5 +1,9 @@
 package co.hoppen.devicelib;
 
+import android.util.Log;
+
+import java.util.Arrays;
+
 /**
  * Created by Administrator on 2018/4/4.
  */
@@ -105,19 +109,20 @@ public class UsbInstructionUtils {
         }else if (typeName.equals("WSKT024")){
             handle =(byte)0x17;
         }else if (typeName.equals("WSKT025")){
-            handle =(byte)0x18;
-        }else if (typeName.equals("WSKT026")){
             handle =(byte)0x19;
-        } else if (typeName.equals("WSKT027")){
+        }else if (typeName.equals("WSKT026")){
             handle =(byte)0x1A;
+        } else if (typeName.equals("WSKT027")){
+            handle =(byte)0x1B;
         } else if (typeName.equals("WSKT028")){
             handle =(byte)0x1C;
         } else if (typeName.equals("WSKT029")){
             handle =(byte)0x1D;
         } else if (typeName.equals("WSKT030")){
             handle =(byte)0x1E;
+        }else{
+            handle = nameChange(typeName);
         }
-
         byte[] config={(byte) 0xAA, (byte) 0x40, (byte) 0x00, (byte) 0x00, (byte) 0x00,  handle};
         return encryption(config);
     }
@@ -147,6 +152,20 @@ public class UsbInstructionUtils {
         mode = (byte) modePosition;
         byte[] config={(byte) 0xAA, (byte) 0x12, mode, mStrength, mtime_1,  mtime_2};
         return encryption(config);
+    }
+
+
+    private static byte nameChange(String name){
+        try {
+            if (name!=null||name.length()==7){
+                String a = name.substring(name.length()-3);
+                int b = Integer.parseInt(a);
+                byte c = (byte) b;
+                return c;
+            }
+        }catch (Exception e){
+        }
+        return 0;
     }
 
 }

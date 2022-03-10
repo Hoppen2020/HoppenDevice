@@ -1,6 +1,7 @@
 package co.hoppen.devicedemo;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ScrollView;
@@ -8,9 +9,12 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Arrays;
+
 import co.hoppen.devicelib.DeviceController;
 import co.hoppen.devicelib.HoppenDeviceHelper;
 import co.hoppen.devicelib.OnDeviceListener;
+import co.hoppen.devicelib.UsbInstructionUtils;
 
 
 public class MainActivity extends AppCompatActivity implements OnDeviceListener {
