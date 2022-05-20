@@ -10,7 +10,7 @@ allprojects {
 ```
 ```
 dependencies {
-    implementation 'com.github.Hoppen2020:HoppenDevice:1.0.2-1'
+    implementation 'com.github.Hoppen2020:HoppenDevice:1.0.2-4'
 }
 ```
 #### 使用
