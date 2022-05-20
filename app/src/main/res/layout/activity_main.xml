@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:textColor="@color/white"
-                android:text="WSKT001"
+                android:text="DEVICE_CODE"
                 android:onClick="wskt001"
                 />
 
@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
                 android:textColor="@color/white"
-                android:text="WSKT001"
+                android:text="USB_VER_INFO"
                 android:onClick="wskt002"
                 />
 
@@ -354,7 +354,7 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -375,11 +375,24 @@
                 android:gravity="center"
                 />
 
-
         </ScrollView>
+                                    <FrameLayout
+                                        android:layout_width="120dp"
+                                        android:layout_height="120dp"
+                                        >
 
+                                        <ProgressBar
+                                            style="@style/loading_out_progressbar"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent" />
 
-    </LinearLayout>
+                                        <ProgressBar
+                                            style="@style/loading_int_progressbar"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent" />
+                                    </FrameLayout>
+
+    </FrameLayout>
 
 
 

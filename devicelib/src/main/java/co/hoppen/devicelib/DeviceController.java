@@ -28,41 +28,57 @@ public class DeviceController implements Controller{
 
     @Override
     public void selectHandle(String typeCode) {
-        mcuDevice.sendInstructions(UsbInstructionUtils.USB_HANDLE_SET(typeCode));
+        mcuDevice.asySendInstructions(UsbInstructionUtils.USB_HANDLE_SET(typeCode));
     }
 
     @Override
     public void setHandleStart(int mode, int strength, int time) {
-        mcuDevice.sendInstructions(UsbInstructionUtils.USB_HANDLE_START(mode,strength,time));
+        mcuDevice.asySendInstructions(UsbInstructionUtils.USB_HANDLE_START(mode,strength,time));
     }
 
     @Override
     public void setHandleStop(int mode, int strength, int time) {
-        mcuDevice.sendInstructions(UsbInstructionUtils.USB_HANDLE_STOP(mode,strength,time));
+        mcuDevice.asySendInstructions(UsbInstructionUtils.USB_HANDLE_STOP(mode,strength,time));
     }
 
     @Override
     public void setHandleConfig(int mode, int strength, int time) {
-        mcuDevice.sendInstructions(UsbInstructionUtils.USB_HANDLE_CONFIG(mode,strength,time));
+        mcuDevice.asySendInstructions(UsbInstructionUtils.USB_HANDLE_CONFIG(mode,strength,time));
     }
 
     @Override
     public void enterHandleRate() {
-        mcuDevice.sendInstructions(UsbInstructionUtils.USB_ENTER_RATE());
+        mcuDevice.asySendInstructions(UsbInstructionUtils.USB_ENTER_RATE());
     }
 
     @Override
     public void exitHandleRate() {
-        mcuDevice.sendInstructions(UsbInstructionUtils.USB_EXIT_RATE());
+        mcuDevice.asySendInstructions(UsbInstructionUtils.USB_EXIT_RATE());
     }
 
     @Override
     public void setHandleRate(int data) {
-        mcuDevice.sendInstructions(UsbInstructionUtils.USB_SET_RATE(data));
+        mcuDevice.asySendInstructions(UsbInstructionUtils.USB_SET_RATE(data));
+    }
+
+    @Override
+    public void getDeviceCode() {
+        mcuDevice.asySendInstructions(UsbInstructionUtils.USB_DEVICE_CODE());
+    }
+
+    @Override
+    public void getUsbVerInfo() {
+        mcuDevice.asySendInstructions(UsbInstructionUtils.USB_VER_INFO());
+    }
+
+    @Override
+    public void customInstruction(byte[] instruction) {
+        mcuDevice.asySendInstructions(instruction);
     }
 
     public void setOnInstructionListener(OnInstructionListener onInstructionListener){
         mcuDevice.setOnInstructionListener(onInstructionListener);
     }
+
 
 }

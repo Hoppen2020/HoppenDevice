@@ -22,4 +22,10 @@ public interface Controller {
 
         void setHandleRate(int data);
 
+        void getDeviceCode();
+
+        void getUsbVerInfo();
+
+        void customInstruction(byte [] instruction);
+
 }

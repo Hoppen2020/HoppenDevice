@@ -6,17 +6,21 @@ import android.hardware.usb.UsbDeviceConnection;
 import android.hardware.usb.UsbEndpoint;
 import android.hardware.usb.UsbInterface;
 import android.hardware.usb.UsbManager;
-import android.icu.text.UFormat;
 
 import com.blankj.utilcode.util.LogUtils;
 
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
+import co.hoppen.devicelib.queue.ConnectMcuDeviceTask;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.ObservableEmitter;
+import io.reactivex.rxjava3.core.ObservableOnSubscribe;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.functions.Consumer;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 /**
  * Created by YangJianHui on 2021/3/16.
@@ -28,7 +32,6 @@ public class McuDevice extends HoppenDevice{
     private UsbEndpoint epOut, epIn;
     private final static int DEFAULT_MAX_READ_BYTES = 128;
     private final static int DEFAULT_TIMEOUT = 500;
-    private String deviceName;
     private OnDeviceListener onDeviceListener;
     private OnInstructionListener onInstructionListener;
     private FloatingView floatingView;
@@ -68,6 +71,12 @@ public class McuDevice extends HoppenDevice{
                                 }
                             }
                         }
+                        //测试
+//                        else {
+//                            if (onInstructionListener!=null){
+//                                instructionCallbackForMainThread(Arrays.toString(bytes));
+//                            }
+//                        }
                     }
                 }catch (Exception e){
                 }
@@ -75,108 +84,51 @@ public class McuDevice extends HoppenDevice{
         }
     };
 
-
-
     public McuDevice(UsbManager usbManager){
         this.usbManager = usbManager;
+    }
+
+    public synchronized void onConnecting(ConnectMcuDeviceTask.ConnectMcuInfo connectMcuInfo){
+        usbDeviceConnection = connectMcuInfo.getUsbDeviceConnection();
+        usbInterface = connectMcuInfo.getUsbInterface();
+        epOut = connectMcuInfo.getEpOut();
+        epIn = connectMcuInfo.getEpIn();
+        if (onDeviceListener!=null)onDeviceListener.onConnected();
+        disposable = Observable.interval(5, 5, TimeUnit.SECONDS).subscribe(new Consumer<Long>() {
+            @Override
+            public void accept(Long aLong) throws Throwable {
+                asySendInstructions(UsbInstructionUtils.USB_SYS_ONLINE());
+            }
+        });
+        readDataThread = new Thread(readRunnable);
+        readDataThread.start();
+
     }
 
 
     @Override
     public synchronized void onConnecting(UsbDevice usbDevice, DeviceType type) {
-        if (deviceName==null){
-            deviceName = usbDevice.getDeviceName();
-        }else {
-            if (!deviceName.equals(usbDevice.getDeviceName()))return;
-        }
-        LogUtils.e(deviceName);
-
-        usbDeviceConnection = usbManager.openDevice(usbDevice);
-        int interfaceCount = usbDevice.getInterfaceCount();
-        if (usbDeviceConnection!=null && interfaceCount>0){
-            usbInterface = usbDevice.getInterface(interfaceCount - 1);
-            boolean claimInterface = usbDeviceConnection.claimInterface(usbInterface, false);
-            LogUtils.e(claimInterface);
-            if (claimInterface){
-                //设置波特率等设置
-                setConfig(usbDeviceConnection,9600,8,1,0);
-                for (int index = 0; index < usbInterface.getEndpointCount(); index++) {
-                    UsbEndpoint ep = usbInterface.getEndpoint(index);
-                    if ((ep.getType() == UsbConstants.USB_ENDPOINT_XFER_BULK)
-                            && (ep.getDirection() == UsbConstants.USB_DIR_OUT)) {
-                        epOut = ep;
-                    }
-                    if ((ep.getType() == UsbConstants.USB_ENDPOINT_XFER_BULK)
-                            && (ep.getDirection() == UsbConstants.USB_DIR_IN)) {
-                        epIn = ep;
-                    }
-                }
-                //-----------
-                boolean success =  discernDevice();
-                LogUtils.e(success);
-                if (!success){
-                    closeDevice();
-                }else {
-                    if (onDeviceListener!=null)onDeviceListener.onConnected();
-                    disposable = Observable.interval(5, 5, TimeUnit.SECONDS).subscribe(new Consumer<Long>() {
-                        @Override
-                        public void accept(Long aLong) throws Throwable {
-                            sendInstructions(UsbInstructionUtils.USB_SYS_ONLINE());
-                        }
-                    });
-                    readDataThread = new Thread(readRunnable);
-                    readDataThread.start();
-                }
-            }
-        }
 
     }
-
-    private boolean discernDevice(){
-        try {
-            boolean success = sendInstructions(UsbInstructionUtils.USB_DEVICE_CODE());
-            if (success){
-                byte[] bytes = readData();
-                if (bytes!=null){
-                    String device="";
-                    try {
-                        device = new String(bytes);
-                        device = device.substring(device.indexOf("<[") + 2, device.lastIndexOf("]>")).trim();
-//                        LogUtils.e(device);
-                    }catch (Exception e){
-                    }
-                    if (device.contains("W003-8888-NURT-"))return true;
-                }
-            }
-
-        }catch (Exception e){
-        }
-        return false;
-    }
-
 
     @Override
     public synchronized void onDisconnect(UsbDevice usbDevice, DeviceType type) {
-        if (deviceName!=null && deviceName.equals(usbDevice.getDeviceName())){
-            if (onDeviceListener!=null)onDeviceListener.onDisconnect();
-            this.closeDevice();
-        }
+        if (onDeviceListener!=null)onDeviceListener.onDisconnect();
+        this.closeDevice();
     }
 
     @Override
-    protected synchronized boolean sendInstructions(byte[] bytes) {
-        boolean b = sendInstructions(bytes, DEFAULT_TIMEOUT);
+    protected synchronized void asySendInstructions(byte[] bytes) {
+        asySendInstructions(bytes, DEFAULT_TIMEOUT);
         if (floatingView!=null){
-            ((FloatingBall)floatingView).addText(b+ " " + Arrays.toString(bytes));
+            ((FloatingBall)floatingView).addText( Arrays.toString(bytes));
         }
-        return b;
     }
 
     @Override
     protected void closeDevice() {
         if (usbDeviceConnection!=null){
             try {
-                if (deviceName!=null){
                     if (disposable!=null)disposable.dispose();
                     usbDeviceConnection.releaseInterface(usbInterface);
                     usbDeviceConnection.close();
@@ -184,22 +136,35 @@ public class McuDevice extends HoppenDevice{
                     usbInterface = null;
                     epOut = null;
                     epIn = null;
-                    deviceName = null;
-                }
             }catch (Exception e){
             }
         }
     }
-
-    private synchronized boolean sendInstructions(byte [] data,int timeOut){
-        boolean success = false;
-            if (usbDeviceConnection!=null&&epOut!=null&&data!=null){
-                if (timeOut<=0) timeOut=1000;
-                int i= usbDeviceConnection.bulkTransfer(epOut,data,data.length,timeOut);
-                success = i>0;
+    //异步
+    private synchronized void asySendInstructions(byte [] data, final int timeOut){
+        Observable.create(new ObservableOnSubscribe<byte []>() {
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<byte[]> emitter) throws Throwable {
+                boolean success = false;
+                if (usbDeviceConnection!=null&&epOut!=null&&data!=null){
+                    int i= usbDeviceConnection.bulkTransfer(epOut,data,data.length,timeOut);
+                    success = i>0;
+                }
             }
-        return  success;
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe();
     }
+    //同步
+    private synchronized boolean synSendInstructions(byte [] data){
+        boolean success = false;
+        if (usbDeviceConnection!=null&&epOut!=null&&data!=null){
+            int i= usbDeviceConnection.bulkTransfer(epOut,data,data.length,0);
+            success = i>0;
+        }
+        return success;
+    }
+
 
     private byte[] readData(){
         final byte[] data = new byte[DEFAULT_MAX_READ_BYTES];

@@ -159,8 +159,10 @@ public class MainActivity extends AppCompatActivity implements OnDeviceListener 
     }
 
     public void wskt001(View view){
-        if (controller!=null)controller.selectHandle("WSKT001");
+        //if (controller!=null)controller.getDeviceCode();
+        if (controller!=null)controller.customInstruction(new byte[]{1});
     }
+
 
     public void wskt006(View view){
         if (controller!=null)controller.selectHandle("WSKT006");
@@ -171,7 +173,7 @@ public class MainActivity extends AppCompatActivity implements OnDeviceListener 
     }
 
     public void wskt002(View view){
-        if (controller!=null)controller.selectHandle("WSKT002");
+        if (controller!=null)controller.getUsbVerInfo();
     }
 
 }

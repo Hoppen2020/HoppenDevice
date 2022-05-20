@@ -13,6 +13,9 @@ import androidx.lifecycle.LifecycleOwner;
 
 import com.blankj.utilcode.util.LogUtils;
 
+import co.hoppen.devicelib.queue.ConnectMcuDeviceTask;
+import co.hoppen.devicelib.queue.TaskQueue;
+
 import static co.hoppen.devicelib.FloatingType.FLOATING_BALL;
 
 /**
@@ -23,6 +26,7 @@ public class HoppenDeviceHelper implements LifecycleEventObserver,OnUsbStatusLis
     private AppCompatActivity appCompatActivity;
     private DeviceController controller;
     private FloatingView floatingView;
+    private TaskQueue taskQueue;
 
     private HoppenDeviceHelper(AppCompatActivity activity,OnDeviceListener onDeviceListener,boolean debugWindow){
         if (activity!=null){
@@ -36,6 +40,7 @@ public class HoppenDeviceHelper implements LifecycleEventObserver,OnUsbStatusLis
                 floatingView = FloatingBuilder.create(FLOATING_BALL.getClassName(), LayoutInflater.from(activity));
                 controller.setFloatingView(floatingView);
             }
+            taskQueue = new TaskQueue();
         }
     }
 
@@ -80,6 +85,17 @@ public class HoppenDeviceHelper implements LifecycleEventObserver,OnUsbStatusLis
         if (controller!=null){
             if (type == DeviceType.MCU){
                 controller.getMcuDevice().onConnecting(usbDevice,type);
+                    ConnectMcuDeviceTask connectMcuDeviceTask =
+                            new ConnectMcuDeviceTask((UsbManager) appCompatActivity.getSystemService(Context.USB_SERVICE),usbDevice);
+                    taskQueue.addTask(connectMcuDeviceTask, new TaskQueue.currentTaskFinish() {
+                        @Override
+                        public void onFinish() {
+                            ConnectMcuDeviceTask.ConnectMcuInfo connectMcuInfo = connectMcuDeviceTask.getConnectMcuInfo();
+                            if (connectMcuInfo.isConform()){
+                                controller.getMcuDevice().onConnecting(connectMcuInfo);
+                            }
+                        }
+                    });
             }
         }
     }
