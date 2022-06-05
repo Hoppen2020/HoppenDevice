@@ -42,7 +42,6 @@ public class ConnectMcuDeviceTask extends Task{
             usbInterface = usbDevice.getInterface(interfaceCount - 1);
 
             boolean claimInterface = usbDeviceConnection.claimInterface(usbInterface, false);
-//            LogUtils.e(claimInterface);
             if (claimInterface) {
                //设置波特率等设置
                setConfig(usbDeviceConnection, 9600, 8, 1, 0);
